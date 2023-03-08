@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  list-style: none;
+}
+
+.nav__item {
+  color: black;
+}
+
+.nav__link {
+  font-size: 30px;
+  text-decoration: none;
+}
