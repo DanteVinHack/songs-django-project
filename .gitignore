@@ -1,5 +1,7 @@
-./frontend/node_modules/
-./server/venv
-./server/media
-./**/__pycache__
+node_modules/
+venv/
+media/
+__pycache__/
+users-token.txt
 
+migrations/*

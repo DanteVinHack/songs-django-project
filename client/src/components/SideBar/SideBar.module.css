@@ -1,0 +1,7 @@
+.sidebar {
+  grid-area: sidebar;
+  background: var(--text);
+  color: var(--second);
+  text-align: center;
+  padding-top: 1rem;
+}

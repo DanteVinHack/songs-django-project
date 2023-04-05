@@ -1,15 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { songReducer } from "./reducers/songs.slice";
+import { playerReducer } from "./reducers/player.slice";
+import { trackReducer } from "./reducers/track.slice";
 import { userReducer } from "./reducers/user.slicer";
 
 const rootReducer = combineReducers({
-  song: songReducer,
+  track: trackReducer,
   user: userReducer,
+  player: playerReducer
 });
 
 export const store = configureStore({
   reducer: rootReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;

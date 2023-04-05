@@ -1,0 +1,15 @@
+.song__list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  flex-wrap: wrap;
+
+  list-style: none;
+  padding-top: 1.5rem;
+  gap: .75rem;
+}
+
+.song__item {
+  flex: 1;
+}

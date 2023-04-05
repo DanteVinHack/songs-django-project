@@ -1,11 +1,11 @@
 import jwt
 
-from django.conf import settings
 from rest_framework import authentication, exceptions
 
 from datetime import datetime
 from typing import Optional
 
+from .base_auth import decode_token
 from ..models import AuthUser
 
 # from .models import AuthUser
@@ -41,11 +41,7 @@ class AuthBackend(authentication.BaseAuthentication):
 
     def authenticate_credential(self, token) -> tuple:
         try:
-            payload = jwt.decode(
-                token,
-                settings.TOKEN_SECRET_KEY,
-                algorithms=settings.ALGORITHM
-            )
+            payload = decode_token(token)
         except jwt.PyJWTError:
             raise exceptions.AuthenticationFailed(
                 'Ошибка авторизации. Такого токена не существует'

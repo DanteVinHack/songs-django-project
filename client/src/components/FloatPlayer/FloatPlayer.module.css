@@ -1,0 +1,28 @@
+.float-player {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: .5rem;
+
+  width: 100%;
+
+  background: var(--text);
+}
+
+.float-player__inner {
+  width: 100%; 
+}
+
+.float-player__volume {
+  -webkit-appearance: slider-vertical;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  translate: 0 -90%;
+}

@@ -1,0 +1,48 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+  padding: 0rem 1rem;
+
+  background: var(--primary);
+  box-shadow: 1px 5px 15px rgba(14, 15, 15, 0.3);
+
+  grid-area: navbar;
+}
+
+.nav__item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+  list-style: none; 
+}
+
+.nav__link {
+  font-size: 16px;
+  text-decoration: none;
+
+  color: var(--text-with-opacity);
+  transition: color 0.3s linear;
+}
+
+.nav__profile-image {
+  transition: all .3s linear;
+}
+
+.nav__profile-image:hover {
+  box-shadow: 0 0 0 2px var(--second);
+}
+
+.nav__link:hover {
+  color: var(--second);
+}
+
+.nav__auth {
+  display: flex;
+  gap: 10px;
+}

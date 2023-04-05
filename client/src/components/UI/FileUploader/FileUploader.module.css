@@ -1,0 +1,17 @@
+.file-uploader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.file-uploader__image {
+  width: 150px; 
+  height: 150px; 
+}
+
+.file-uploader.rounded {
+  border-radius: 50%;
+}

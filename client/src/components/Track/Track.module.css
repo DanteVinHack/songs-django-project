@@ -1,0 +1,59 @@
+:root {
+  --radius: .5rem;
+}
+
+.player {
+  position: relative;
+
+  display: flex;
+  justify-content: flex-start;
+
+  flex-direction: column;
+  gap: var(--radius);
+
+  text-align: center;
+
+  padding: 0 1rem;
+}
+
+.player__button {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  opacity: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid var(--second);
+  border-radius: var(--radius) !important;
+
+  transition: all .3s linear;
+}
+
+.player:hover .player__button {
+  opacity: 1;
+  background: transparent;
+  color: var(--second)
+}
+
+.player.hover .player__button {
+  opacity: 1;
+  background: transparent;
+  color: var(--second)
+}
+
+.player__wrapper {
+  position: relative;
+
+  min-width: 150px; 
+  min-height: 150px;
+
+  background: white;
+  background-size: cover;
+  background-repeat: none;
+  border-radius: var(--radius);
+}

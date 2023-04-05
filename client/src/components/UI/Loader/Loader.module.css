@@ -1,0 +1,22 @@
+.loader {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+
+  width: 75px;
+  height: 75px;
+
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-right: 5px solid var(--text);
+  animation: loader 750ms infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

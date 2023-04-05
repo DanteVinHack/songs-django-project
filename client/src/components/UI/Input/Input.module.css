@@ -1,0 +1,13 @@
+.input {
+  cursor: pointer;
+  outline: none;
+  background: var(--text);
+
+  border: 1px solid var(--text);
+  border-radius: .25rem;
+
+  color: var(--second);
+
+  padding: 0.5rem 1.5rem;
+  transition: all .3s linear;
+}

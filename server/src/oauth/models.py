@@ -12,7 +12,7 @@ class AuthUser(models.Model):
 
     email = models.EmailField(max_length=160, unique=True)
     password = models.CharField('Пароль', max_length=60)
-    display_name = models.CharField('Показываемое имя', max_length=60)
+    display_name = models.CharField('Пользовательское имя', max_length=60)
     create_account_date = models.DateField(
         'Дата создания аккаунта',
         auto_now_add=True

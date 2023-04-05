@@ -14,8 +14,13 @@ SECRET_KEY = 'django-insecure-c@ll06+lx7$6(y5frk6#s$+g!i^r1gp&6q@b_eoe42#qvu2w3e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CORS_ALLOW_ORIGINS = True
+ALLOWED_HOSTS = [
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://localhost:3000'
+]
 
 # Application definition
 
@@ -30,8 +35,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    'src.oauth',
-    # 'src.music',
+    'src.oauth.apps.OauthConfig',
+    'src.audio_library.apps.AudioLibraryConfig',
 ]
 
 MIDDLEWARE = [
@@ -106,16 +111,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Token setup
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 5
+ACCESS_TOKEN_EXPIRE_MINUTES = 1440 * 15
 TOKEN_SECRET_KEY = 'dsfkljf324kjl%u98w4dfdsdfljsfcxnkaDAnte'
 ALGORITHM = 'HS256'
-
+ENCODE = 'utf-8'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENICATION_CLASSES': (
-        'src.oauth.base.auth_backend.AuthBackend',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'src.oauth.services.auth_backend.AuthBackend',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
