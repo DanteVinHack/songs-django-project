@@ -1,4 +1,6 @@
 .auth-form {
+	position: relative;
+	z-index: var(--z-index-10);
   display: flex;
   justify-content: center;
   
@@ -8,4 +10,18 @@
 
   flex-direction: column;
   background-image: var(--primary-gradient);
+}
+
+.auth-form::before {
+	content: '';
+	position: absolute;
+	left: -10px;
+	right: -10px;
+	top: -10px;
+	bottom: -10px;
+	z-index: var(--z-index-back);
+
+	background: var(--primary-gradient);
+	/* translate: -25% -25%; */
+	filter: blur(75px);
 }

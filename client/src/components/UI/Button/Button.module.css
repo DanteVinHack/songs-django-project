@@ -17,12 +17,10 @@
   transition-property: background border color;
 }
 
-.button:hover {
+.button:hover, .button:focus {
   background: var(--second);
   border-color: var(--second);
   color: var(--text);
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 

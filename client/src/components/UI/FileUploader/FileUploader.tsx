@@ -1,61 +1,55 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import style from "./FileUploader.module.css"
 
 import { Input, Button } from '../index'
 
-interface FileUploaderProps {
+export interface FileUploaderProps {
   name: string;
-  defaultImage?: string;
   accept: string;
-  rounded?: boolean;
+	placeholder: string;
+	setFile?(file: File): void;
+	required: boolean;
 } 
 
-export const FileUploader: React.FC<FileUploaderProps> = ({ name, accept, defaultImage, rounded }) => {
-  const ref = useRef<HTMLInputElement>()
-  const [image, setImage] = useState<string>(defaultImage || "")
-
-  useEffect(() => {
-    if (defaultImage) {
-      setImage(defaultImage)
-    }
-  }, [defaultImage])
-
+export const FileUploader: React.FC<FileUploaderProps> = ({ name, accept, placeholder, required, setFile }) => {
+  const input = useRef<HTMLInputElement>(null)
+	
   const changeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target?.files) {
-      return;
-    }
-
-    const reader = new FileReader()
-    const file = event.target?.files[0]
-    reader.readAsDataURL(file)
-
-    reader.onload = () => {
-      const result = reader.result as string
-      setImage(result)
-    }
+		if (!event.target.files) {
+			return;
+		}
+		
+		if (setFile) {
+			setFile(event.target.files[0])
+		}
   }
 
   return (
     <div className={style["file-uploader"]}>
-      { image && 
-        <img
-          className={`${style["file-uploader__image"]} ${rounded && "rounded"}`}
-          width="150"
-          height="150"
-          src={image}
-        /> 
-      }
-      <Input
-        name={name}
-        ref={ref}
-        type="file"
-        accept={accept}
-        multiple={false}
-        onChange={changeFile}
-        style={{ display: "none" }}
-      />
-      <Button type="button" onClick={() => ref.current?.click()}>
-        Загрузить новую аватарку
+			{ required ?
+				<Input
+					name={name}
+					ref={input}
+					type="file"
+					accept={accept}
+					multiple={false}
+					onChange={changeFile}
+					required
+					className="display_none"
+				/> :
+				<Input
+					name={name}
+					ref={input}
+					type="file"
+					accept={accept}
+					multiple={false}
+					onChange={changeFile}
+					className="display_none"
+				/>
+			}
+			<h4>{ input.current?.files[0]?.name || "" }</h4>
+      <Button type="button" onClick={() => input.current?.click()}>
+				{placeholder}
       </Button>
     </div>
   )

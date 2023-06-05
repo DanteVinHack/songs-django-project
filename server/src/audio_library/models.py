@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.db.models.fields import validators
 
 
 from src.base.services import (
@@ -15,11 +16,6 @@ class Genre(models.Model):
     """ Модель жанра """
 
     name = models.CharField('Название', max_length=50)
-    url = models.SlugField(
-        'Ссылка к жанру',
-        unique=True,
-        max_length=120
-    )
 
     def __str__(self):
         return f'{self.name}'
@@ -28,49 +24,18 @@ class Genre(models.Model):
         verbose_name = 'Жанр'
         verbose_name_plural = 'Жанры'
 
-
-class Album(models.Model):
-    """ Модель альбомов для трэков """
-    user = models.ForeignKey(
-        AuthUser,
-        on_delete=models.CASCADE,
-        related_name='albums'
-    )
-    title = models.CharField('Название альбома', max_length=50)
-    description = models.TextField('Описание', max_length=1500)
-    private = models.BooleanField('Приватный альбом', default=False)
-    cover = models.ImageField(
-        'Заголовок',
-        upload_to=get_upload_path_cover_album,
-        blank=True,
-        null=True,
-        validators=[
-            FileExtensionValidator(['jpg', 'jpeg']),
-            validate_image_size
-        ]
-    )
-
-    def __str__(self):
-        return f'{self.title} - {self.user.display_name}'
-
-    class Meta:
-        verbose_name = 'Альбом'
-        verbose_name_plural = 'Альбомы'
-
-
 class Track(models.Model):
     """ Модель песни(трэка) """
 
     title = models.CharField('Название', max_length=100)
-    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING)
+    genre = models.ForeignKey(
+        Genre,
+        on_delete=models.DO_NOTHING, 
+    )
     user = models.ForeignKey(
         AuthUser,
         on_delete=models.CASCADE,
         related_name='tracks'
-    )
-    album = models.ForeignKey(
-        Album,
-        on_delete=models.DO_NOTHING
     )
     file = models.FileField(
         upload_to=get_upload_path_track,
@@ -81,13 +46,12 @@ class Track(models.Model):
     user_of_likes = models.ManyToManyField(
         AuthUser,
         related_name='likes_of_tracks',
-        blank=True
+        blank=True,
     )
     download = models.PositiveIntegerField('Количество скачиваний', default=0)
     cover = models.ImageField(
         upload_to=get_upload_path_track_image,
-        blank=True,
-        null=True,
+        validators=[validate_image_size]
     )
     create_at = models.DateTimeField('Дата добавления', auto_now_add=True)
 

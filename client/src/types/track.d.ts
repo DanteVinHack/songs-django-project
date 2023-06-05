@@ -1,6 +1,12 @@
-import { ChangeEvent } from "react";
+export interface IAddTrack {
+	title: string;
+	genre: string;
+	file?: File;
+	cover?: File;
+	link_of_author: number;
+}
 
-export interface ITrack {
+export interface ITrack extends IAddTrack {
   id: number;
   title: string;
   file: string;
@@ -8,6 +14,7 @@ export interface ITrack {
   download: number;
   user: string;
   cover: string;
+	user_of_likes: number[];
 }
 
 export interface ITrackState {

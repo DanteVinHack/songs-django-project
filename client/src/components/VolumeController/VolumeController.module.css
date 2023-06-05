@@ -1,0 +1,39 @@
+.volume-controller {
+	position: relative;
+
+	padding: .5rem !important;
+	border-radius: 50% !important;
+}
+
+:root {
+	--width-procent: 175%;
+	--top-margin: -125%;
+}
+
+.volume-controller input[type="range"] {
+	position: absolute;
+	z-index: 1;
+	top: -25%;
+
+	rotate: -90deg;
+
+	opacity: 0;
+	width: 100%;
+
+	transition: all .3s linear;
+	border-radius: .5rem;
+}
+
+.volume-controller:hover input[type="range"] {
+	top: var(--top-margin);
+
+	opacity: 1;
+	width: var(--width-procent);
+}
+
+.volume-controller input[type="range"]:hover {
+	top: var(--top-margin);
+
+	opacity: 1;
+	width: var(--width-procent);
+}

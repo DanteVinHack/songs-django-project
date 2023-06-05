@@ -7,9 +7,21 @@
   padding: 0rem 1rem;
 
   background: var(--primary);
-  box-shadow: 1px 5px 15px rgba(14, 15, 15, 0.3);
+  box-shadow: 1px 5px 15px var(--text-with-opacity);
 
   grid-area: navbar;
+	animation: appear .2s linear;
+}
+
+
+@keyframes appear	{
+	0% {
+		translate: 0 -100%;
+	}	
+
+	100% {
+		translate: 0 ;
+	}
 }
 
 .nav__item {

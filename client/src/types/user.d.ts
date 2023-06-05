@@ -2,7 +2,6 @@ export interface IUser {
   email: string | null;
   display_name: string | null;
   avatar: string | null;
-  isAuth: boolean;
 }
 
 export interface IUserToken {
@@ -13,4 +12,5 @@ export interface IUserToken {
 
 export interface IUserState extends IUser {
   error: null | string; 
+  isAuth: boolean;
 }

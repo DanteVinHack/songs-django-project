@@ -11,20 +11,33 @@
 :root {
   --text-with-opacity: rgba(20, 20, 20, .7);
   --text: #202020;
+	--text-light: #ffffff;
   --primary: rgba(145, 0, 255, 1);
   --second: rgb(250, 70, 200);
   --anti-accent: rgb(145, 100, 255); 
+  --anti-accent-light: rgb(145, 150, 255); 
   --primary-gradient: linear-gradient(
     4.5deg,
     rgba(245, 116, 185, 1) 14.7%,
     var(--primary) 88.7%
   );
+	--z-index-10: 10;
+	--z-index-1: 1;
+	--z-index-back: -1;
 }
 
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: var(--text);
+}
+
+.white {
+	color: var(--text-light);
+}
+
+.black {
+	color: var(--text);
 }
 
 .empty-layout {
@@ -60,31 +73,30 @@ body {
   min-height: 100vh;
 }
 
-.home {
+.main-layout_not-auth {
+  grid-template-areas:
+    "navbar navbar navbar navbar navbar navbar"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main";
+}
+
+.main-layout__body {
   position: relative;
   grid-area: main;
 }
 
-h2 {
-  position: relative;
-  cursor: pointer;
-}
-
-h2::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: 0;
-  height: 2px;
-  border-radius: 15px;
-  background: #151515;
-  transition: width 0.2s linear;
-}
-
-h2:hover::before {
-  width: 100%;
+.page {
+	padding: 1rem 1.5rem 1rem;
 }
 
 .display_none {

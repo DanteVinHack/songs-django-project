@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./AuthForm.module.css";
 
-import { Button, Input } from "../UI";
+import { Button, FileUploader, Input } from "../UI";
+import { Form } from "../Form";
 
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/use.store";
@@ -18,28 +19,30 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const dispatch = useAppDispatch();
   const navigator = useNavigate()
 
-  const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
 
+		navigator("/")
+
     if (mode === AuthMode.login) {
-      dispatch(await authenticationRequest(formData, AuthMode.login));
+      dispatch(authenticationRequest(formData, AuthMode.login));
     } else {
-      dispatch(await authenticationRequest(formData, AuthMode.register));
+      dispatch(authenticationRequest(formData, AuthMode.register));
     }
 
-    if (!error) {
-      navigator("/")
-    } else {
-      // do something
+    if (error) {
+
     }
-  };
+	};
 
   return (
-    <form onSubmit={onSubmit} className={style["auth-form"]}>
+    <Form onSubmit={onSubmit} className={style["auth-form"]}>
+
       <Input placeholder="Введите Email" name="email" type="email" />
       <Input placeholder="Введите пароль" name="password" type="password" />
+
       {mode === AuthMode.login || (
         <>
           <Input
@@ -47,14 +50,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
             name="display_name"
             type="text"
           />
-          <Input type="file" name="avatar" accept="jpg, png" />
+						<FileUploader
+							placeholder="Желаемый аватар"
+							name="avatar"
+							accept="jpg, png"
+							required={false}
+						/>
         </>
       )}
-      {/*<Link to="/">*/}
+
       <Button>
         {mode === AuthMode.login ? "Войти" : "Зарегистрироваться"}
       </Button>
-      {/*</Link>*/}
-    </form>
+
+    </Form>
   );
 };

@@ -18,13 +18,9 @@ urlpatterns = [
         {'put': 'update', 'delete': 'destroy'}
     )),
 
-    path('me/album/', views.AlbumView.as_view(
-        {'get': 'list', 'post': 'create'}
+    path('auth/me/favorite/', views.TrackFavoriteView.as_view(
+        {'get': 'list'}
     )),
-    path('me/album/<int:pk>/', views.AlbumView.as_view(
-        {'put': 'update', 'delete': 'destroy'}
-    )),
-
     path('me/track/', views.TrackAuthorView.as_view(
         {'get': 'list', 'post': 'create'}
     )),

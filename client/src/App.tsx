@@ -1,57 +1,27 @@
-import { authAPI } from "./api";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./hooks/use.store";
-import { useStorage } from "./hooks/use.storage";
-import { useEffect } from "react";
-import { IUserToken } from "./types/user";
+import {AuthRoutes,GuestRoutes} from "./components/Routes";
 
-import { MainLayout } from "./layouts/Main";
-import { EmptyLayout } from "./layouts/Empty";
+import {useActions} from "./hooks/use.actions";
+import {useStorage} from "./hooks/use.storage";
+import {useAppSelector} from "./hooks/use.store";
 
-import { Home } from "./pages/Home";
-import { Me } from "./pages/Me";
-import { Register } from "./pages/Auth/Register";
-import { Login } from "./pages/Auth/Login";
-import { authUserError, authUserSuccess } from "./store/reducers/user.slicer";
+import {IUserToken} from "./types/user";
 
 function App() {
-  const { isAuth } = useAppSelector(state => state.user)
-  const [token] = useStorage<IUserToken>("token");
-  const dispatch = useAppDispatch();
+  const error = useAppSelector(state => state.user.error)
+	const [token] = useStorage<IUserToken | null>('token')
+	const { meRequest } = useActions()
 
-  useEffect(() => {
-    console.log(token);
-    if (token) {
-      authAPI
-        .getMe(token)
-        .then(({ data }) => {
-          dispatch(authUserSuccess(data));
-        })
-        .catch((err) => {
-          dispatch(authUserError(err.message));
-        });
-    }
-  }, []);
+	window.addEventListener('DOMContentLoaded', () => {
+		if (token && !error) {
+			meRequest()
+		}
+  })
 
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route path="" element={<Home />} />
-            <Route path="me" element={<Me />} />
-          </Route>
-          {!isAuth ? 
-            <Route path="/auth" element={<EmptyLayout />}>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-            </Route>
-            : null
-          }
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+	if (token && !error) {
+		return  <AuthRoutes />
+	}
+
+  return <GuestRoutes />
 }
 
 export default App;

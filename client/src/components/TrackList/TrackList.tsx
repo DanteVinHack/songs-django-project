@@ -1,22 +1,20 @@
-import React, { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks/use.store";
-import { getAllTracks } from "../../store/actions-creators/track";
+import React from "react";
+import { useAppSelector } from "../../hooks/use.store";
 import { ITrack } from "../../types/track";
 import { Track } from "../Track";
 import { Loader } from "../UI";
 import style from "./TrackList.module.css";
 
 interface ITrackList {
-  setTrack(track: ITrack): void;
+	tracks: ITrack[]
+	isLoading: boolean;
+	error: string | null;
+	message: string;
 }
 
-export const TrackList: React.FC<ITrackList> = ({ setTrack }) => {
-  const { tracks, isLoading, error } = useAppSelector((state) => state.track);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getAllTracks());
-  }, []);
+export const TrackList: React.FC<ITrackList> = ({ tracks, isLoading, error, message }) => {
+	const currentTrack = useAppSelector(state => state.player.value)
+	const isPlay = useAppSelector(state => state.player.isPlay)
 
   if (isLoading) {
     return (
@@ -34,15 +32,15 @@ export const TrackList: React.FC<ITrackList> = ({ setTrack }) => {
     <div>
       <ul className={style.song__list}>
         {tracks.length ? (
-          tracks.map(
-            track => <Track
+					 tracks.map(track =>
+						<Track
               key={track.id}
               track={track}
-              setTrack={setTrack}
+							isPlay={track.id == currentTrack?.id && isPlay}
             />
           )
         ) : (
-          <h1>Not have songs</h1>
+          <h1>{ message }</h1>
         )}
       </ul>
     </div>

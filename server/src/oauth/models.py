@@ -23,7 +23,7 @@ class AuthUser(models.Model):
         blank=True,
         null=True,
         validators=[
-            FileExtensionValidator(['jpg', 'png']),
+            FileExtensionValidator(['jpg', 'jpeg', 'png']),
             validate_image_size
         ]
     )

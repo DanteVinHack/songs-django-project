@@ -25,9 +25,30 @@ const userSlicer = createSlice({
       state.isAuth = false;
       state.error = action.payload
     },
+		updateUser(state, action: PayloadAction<IUser>) {
+      const { email, display_name, avatar } = action.payload;
+
+      state.email = email;
+      state.display_name = display_name;
+      state.avatar = avatar;
+      state.isAuth = true;
+		},
+		logout(state) {
+      state.email = null;
+      state.display_name = null;
+      state.avatar = null;
+      state.isAuth = false;
+			state.error = null
+		}
   },
 });
 
-export const { authUserError, authUserSuccess } = userSlicer.actions;
+export const {
+	authUserError,
+	authUserSuccess,
+	updateUser,
+	logout
+} = userSlicer.actions;
+export const actions = userSlicer.actions
 
 export const userReducer = userSlicer.reducer;

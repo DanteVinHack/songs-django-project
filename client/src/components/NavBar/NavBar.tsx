@@ -44,13 +44,13 @@ export const NavBar: React.FC = () => {
               <li className={style.nav__item}>
                 <Link to="/me/" className={style.nav__link}>
                     {avatar ? 
-                      <img
-                        src={avatar}
-                        width="35"
-                        height="35"
-                        style={{ borderRadius: "50%" }}
-                        className={style["nav__profile-image"]}
-                      /> :
+											<img
+												src={avatar}
+												width="35"
+												height="35"
+												style={{ borderRadius: "50%" }}
+												className={style["nav__profile-image"]}
+											/> :
                       (display_name || email)
                     }
                     

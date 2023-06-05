@@ -5,6 +5,7 @@ interface IConfig {
   get REGISTER_URL(): string;
   get LOGIN_URL(): string;
   get ME_URL(): string;
+  get ME_TRACKS(): string;
 }
 
 export const config: Readonly<IConfig> = {
@@ -23,5 +24,8 @@ export const config: Readonly<IConfig> = {
   },
   get ME_URL() {
     return this.API_URL + "/auth/me/";
+  },
+  get ME_TRACKS() {
+    return this.API_URL + "/me/track/";
   },
 };

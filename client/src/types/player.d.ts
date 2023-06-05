@@ -1,10 +1,13 @@
-export interface IPlayer {
+export interface IPlayerStorage {
+	volume: number,
+	repeat: boolean
+}
+
+export interface IPlayer extends IPlayerStorage {
   value: ITrack | null;
   isPlay: boolean;
   currentTime: number;
   duration: number;
-  volume: number;
-  repeat: boolean;
 }
 
 export interface IPlayerState extends IPlayer {}
@@ -17,3 +20,4 @@ export interface IUsePlayer {
   onTimeUpdate(event: ChangeEvent<HTMLAudioElement>): void;
   setTrack(track: ITrack): void;
 }
+

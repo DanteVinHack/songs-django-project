@@ -3,7 +3,6 @@ from django.contrib import admin
 from . import models
 
 admin.site.register(models.Comment)
-admin.site.register(models.Album)
 admin.site.register(models.PlayList)
 
 
@@ -17,7 +16,5 @@ class TrackAdmin(admin.ModelAdmin):
 
 @admin.register(models.Genre)
 class GenreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'url',)
+    list_display = ('id', 'name',)
     list_display_links = ('id', 'name')
-
-    prepopulated_fields = {'url': ('name',)}

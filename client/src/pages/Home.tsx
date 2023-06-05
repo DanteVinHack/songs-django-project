@@ -1,19 +1,28 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-import { FloatPlayer } from "../components/FloatPlayer/FloatPlayer";
-import { TrackList } from "../components/TrackList";
+import {TrackList} from "../components/TrackList";
+import {Title} from '../components/UI';
+import {useActions} from '../hooks/use.actions';
 
-import { setValue } from '../store/reducers/player.slice';
-import { useAppSelector } from '../hooks/use.store';
+import {useAppSelector} from '../hooks/use.store';
 
 export const Home: React.FC = () => {
-  const { value } = useAppSelector(state => state.player)
+  const { tracks, isLoading, error } = useAppSelector(state => state.track)
+	const { getAllTracks } = useActions()
+
+	useEffect(() => {
+		getAllTracks()
+	}, [])	
 
   return (
-    <div className="home">
-      <TrackList setTrack={setValue} />
-
-      <FloatPlayer track={value} />
+    <div className="page">
+			<Title>Главная</Title>
+			<TrackList
+				tracks={tracks}
+				isLoading={isLoading}
+				error={error}
+				message={"Трэков пока что, нет."}
+			/>
     </div>
   );
 };
